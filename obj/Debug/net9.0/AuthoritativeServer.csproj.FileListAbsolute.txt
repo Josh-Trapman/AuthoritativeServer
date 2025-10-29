@@ -1,0 +1,14 @@
+C:\msys64\home\Josh\AuthoritativeServer\bin\Debug\net9.0\AuthoritativeServer.exe
+C:\msys64\home\Josh\AuthoritativeServer\bin\Debug\net9.0\AuthoritativeServer.deps.json
+C:\msys64\home\Josh\AuthoritativeServer\bin\Debug\net9.0\AuthoritativeServer.runtimeconfig.json
+C:\msys64\home\Josh\AuthoritativeServer\bin\Debug\net9.0\AuthoritativeServer.dll
+C:\msys64\home\Josh\AuthoritativeServer\bin\Debug\net9.0\AuthoritativeServer.pdb
+C:\msys64\home\Josh\AuthoritativeServer\obj\Debug\net9.0\AuthoritativeServer.GeneratedMSBuildEditorConfig.editorconfig
+C:\msys64\home\Josh\AuthoritativeServer\obj\Debug\net9.0\AuthoritativeServer.AssemblyInfoInputs.cache
+C:\msys64\home\Josh\AuthoritativeServer\obj\Debug\net9.0\AuthoritativeServer.AssemblyInfo.cs
+C:\msys64\home\Josh\AuthoritativeServer\obj\Debug\net9.0\AuthoritativeServer.csproj.CoreCompileInputs.cache
+C:\msys64\home\Josh\AuthoritativeServer\obj\Debug\net9.0\AuthoritativeServer.dll
+C:\msys64\home\Josh\AuthoritativeServer\obj\Debug\net9.0\refint\AuthoritativeServer.dll
+C:\msys64\home\Josh\AuthoritativeServer\obj\Debug\net9.0\AuthoritativeServer.pdb
+C:\msys64\home\Josh\AuthoritativeServer\obj\Debug\net9.0\AuthoritativeServer.genruntimeconfig.cache
+C:\msys64\home\Josh\AuthoritativeServer\obj\Debug\net9.0\ref\AuthoritativeServer.dll
