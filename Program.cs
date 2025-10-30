@@ -1,5 +1,5 @@
 using System;
-using GameApp;
+using Network;
 using SplashKitSDK;
 
 namespace AuthoritativeServer
@@ -8,28 +8,28 @@ namespace AuthoritativeServer
     {
         public static void Main()
         {
-            Window window = new("Name", 200, 200);
-            Client client = new();
-            Host host = new();
+            Host host;
+            Client client;
 
-            SplashKitSDK.Timer timer = new("delta");
-            timer.Start();
+            string input = Lobby();
 
-
-            do
+            if (input == "1")
             {
-                SplashKit.ProcessEvents();
-                float dt = timer.Ticks / 1000.0f;
-                timer.Reset();
+                host = new Host();
+            }
+            else if (input == "2")
+            {
+                client = new Client();
+            }
+        }
 
-                host.BroadcastLobby();
+        private static string Lobby()
+        {
+            Console.WriteLine("\n1: Host\n2: Join\n\nEnter 1 or 2: ");
+            string input = Console.ReadLine();
 
+            return input;
 
-                SplashKit.ClearScreen();
-                
-                SplashKit.RefreshScreen(60);
-
-            } while (!window.CloseRequested);
         }
     }
 }

@@ -1,31 +1,35 @@
-using System.Buffers;
 using System.Net;
 using System.Net.Sockets;
 using System.Numerics;
 using System.Text;
+ 
 
-namespace GameApp
+namespace Network
 {
 
     public class Client
     {
-        private Vector2 _position;
 
         private readonly UdpClient _udp;
+        
+        private const int DEFAULT_PORT = 56767;
+
 
 
         public Client()
         {
-            _udp = new(0);
+            _udp = new(DEFAULT_PORT);
         }
 
-        public void Listen()
+        public void DisplayLobbies()
         {
             try
             {
-                IPEndPoint endPoint = new IPEndPoint(IPAddress.Broadcast, 11000);
+                IPEndPoint endPoint = new IPEndPoint(IPAddress.Broadcast, DEFAULT_PORT);
                 byte[] msg = _udp.Receive(ref endPoint);
-                Console.WriteLine(msg[0]);
+                string lobby = Encoding.ASCII.GetString(msg);
+
+                Console.WriteLine(lobby);
             }
             catch (Exception ex)
             {
