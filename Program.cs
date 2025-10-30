@@ -10,6 +10,7 @@ namespace AuthoritativeServer
         {
             Window window = new("Name", 200, 200);
             Client client = new();
+            Host host = new();
 
             SplashKitSDK.Timer timer = new("delta");
             timer.Start();
@@ -21,6 +22,7 @@ namespace AuthoritativeServer
                 float dt = timer.Ticks / 1000.0f;
                 timer.Reset();
 
+                host.BroadcastLobby();
 
 
                 SplashKit.ClearScreen();
