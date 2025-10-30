@@ -8,8 +8,8 @@ namespace AuthoritativeServer
     {
         public static void Main()
         {
-            Host host;
-            Client client;
+            Host host = new();
+            Client client = new();
 
             string input = Lobby();
 
@@ -20,6 +20,11 @@ namespace AuthoritativeServer
             else if (input == "2")
             {
                 client = new Client();
+            }
+
+            while (true)
+            {
+                host.BroadcastLobby();
             }
         }
 
