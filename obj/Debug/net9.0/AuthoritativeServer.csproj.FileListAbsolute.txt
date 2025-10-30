@@ -12,3 +12,4 @@ C:\msys64\home\Josh\AuthoritativeServer\obj\Debug\net9.0\refint\AuthoritativeSer
 C:\msys64\home\Josh\AuthoritativeServer\obj\Debug\net9.0\AuthoritativeServer.pdb
 C:\msys64\home\Josh\AuthoritativeServer\obj\Debug\net9.0\AuthoritativeServer.genruntimeconfig.cache
 C:\msys64\home\Josh\AuthoritativeServer\obj\Debug\net9.0\ref\AuthoritativeServer.dll
+C:\msys64\home\Josh\AuthoritativeServer\obj\Debug\net9.0\AuthoritativeServer.sourcelink.json
