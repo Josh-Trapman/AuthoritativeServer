@@ -26,6 +26,8 @@ namespace AuthoritativeServer
             {
                 host.BroadcastLobby();
             }
+
+            
         }
 
         private static string Lobby()
