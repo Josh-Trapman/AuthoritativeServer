@@ -36,6 +36,9 @@ namespace AuthoritativeServer
 
             _menuHandler.Update();
 
+            if (_menuHandler.Main.HostGame.Clicked()) _session = new Host();
+            if (_menuHandler.Main.JoinGame.Clicked()) _session = new Client();
+
             if (_session != null && _menuHandler.Main.Visible)
             {
                 _session.UDP.Close();
