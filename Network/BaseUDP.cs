@@ -11,8 +11,8 @@ namespace Network
 
         public BaseUDP()
         {
-            _udp = new UdpClient();
             _broadcastEP = new IPEndPoint(IPAddress.Broadcast, BROADCAST_PORT);
+            _udp = new UdpClient();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Menus
 
         public HostMenu()
         {
-            _endHost = new Button(20, 20, 80, 40, "Back");
+            _endHost = new Button(100, 20, 80, 40, "Back");
             _startGame = new Button(20, 70, 80, 40, "Start");
 
             _buttons = new List<Button> { _endHost, _startGame };

@@ -27,7 +27,6 @@ namespace AuthoritativeServer
         public void Draw()
         {
             if (_menuHandler.Visible) _menuHandler.Draw();
-
         }
 
         private void UpdateMenus()
