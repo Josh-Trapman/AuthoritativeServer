@@ -9,6 +9,7 @@ namespace Network
 
     public class Client
     {
+        private  IPEndPoint _broadcastEP;
 
         private readonly UdpClient _udp;
         
@@ -18,15 +19,16 @@ namespace Network
 
         public Client()
         {
-            _udp = new(DEFAULT_PORT);
+            _udp = new();
+            _broadcastEP = new IPEndPoint(IPAddress.Broadcast, DEFAULT_PORT);
+
         }
 
         public void DisplayLobbies()
         {
             try
             {
-                IPEndPoint endPoint = new IPEndPoint(IPAddress.Broadcast, DEFAULT_PORT);
-                byte[] msg = _udp.Receive(ref endPoint);
+                byte[] msg = _udp.Receive(ref _broadcastEP);
                 string lobby = Encoding.ASCII.GetString(msg);
 
                 Console.WriteLine(lobby);
