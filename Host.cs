@@ -1,30 +1,26 @@
 using System.Diagnostics;
 using System.Net;
-using System.Net.Sockets;
 using System.Text;
 
 namespace Network
 {
-    public class Host
+    public class Host : BaseUDP
     {
         private int _tick;
         private int _hostPort;
         private Stopwatch _broadcastTimer;
 
-        private readonly UdpClient _udp;
-        private readonly IPEndPoint _broadcastEP;
 
-        private const int DEFAULT_PORT = 56767;
         private const int BROADCAST_DELAY = 1000;
 
         public Host()
         {
-            _broadcastEP = new IPEndPoint(IPAddress.Broadcast, DEFAULT_PORT);
-            _udp = new(0);
+            UDP.Client.Bind(new IPEndPoint(IPAddress.Any, 0));
+
             _broadcastTimer = new Stopwatch();
             _broadcastTimer.Start();
 
-            if (_udp.Client.LocalEndPoint is IPEndPoint ep) 
+            if (_udp.Client.LocalEndPoint is IPEndPoint ep)
             {
                 _hostPort = ep.Port;
             }
@@ -46,6 +42,11 @@ namespace Network
                 _broadcastTimer.Restart();
                 _tick++;
             }
+        }
+
+        public override void Update()
+        {
+            BroadcastLobby();
         }
     }
 }

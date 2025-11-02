@@ -1,4 +1,3 @@
-using System;
 using Network;
 using SplashKitSDK;
 
@@ -8,35 +7,35 @@ namespace AuthoritativeServer
     {
         public static void Main()
         {
-            Host host = new();
-            Client client = new();
+            BaseUDP? udp = JoinOrHost();
 
-            string input = Lobby();
-
-            if (input == "1")
+            if (udp is Host)
             {
-                host = new Host();
+                udp = (Host)udp;
             }
-            else if (input == "2")
+            else if (udp is Client)
             {
-                client = new Client();
+                udp = (Client)udp;
             }
 
             while (true)
             {
-                host.BroadcastLobby();
-            }
+                if (udp == null) return;
 
-            
+                udp.Update();
+
+
+            }            
         }
 
-        private static string Lobby()
+        private static BaseUDP? JoinOrHost()
         {
-            Console.WriteLine("\n1: Host\n2: Join\n\nEnter 1 or 2: ");
+            Console.WriteLine("\n1: Host\n2: Join\n\nEnter (1-3): ");
             string input = Console.ReadLine();
 
-            return input;
-
+            if (input == "1") return new Host();
+            else if (input == "2") return new Client();
+            else return null;
         }
     }
 }
