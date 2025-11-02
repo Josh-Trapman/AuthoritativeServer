@@ -1,3 +1,4 @@
+using System.Net;
 using System.Text;
  
 
@@ -8,7 +9,7 @@ namespace Network
     {
         public Client()
         {
-            UDP.Client.Bind(_broadcastEP);
+            UDP.Client.Bind(new IPEndPoint(IPAddress.Any, BROADCAST_PORT));
         }
 
         public void DisplayLobbies()
