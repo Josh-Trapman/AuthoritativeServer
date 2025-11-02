@@ -13,6 +13,11 @@ namespace Menus
             set { _visible = value; }
         }
 
+        public List<Button> Buttons
+        {
+            get { return _buttons; }
+        }
+
         public virtual void Draw()
         {
             if (_visible)

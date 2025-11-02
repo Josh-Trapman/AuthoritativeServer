@@ -25,7 +25,6 @@ namespace Menus
         public double X
         {
             get { return _position.X; }
-            
         }
         public double Y
         {

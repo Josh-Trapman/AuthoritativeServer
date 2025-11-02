@@ -2,10 +2,18 @@ namespace Menus
 {
     public class JoinMenu : BaseMenu, IMenu
     {
-        public void Update()
+        private Button _back;
+
+        public JoinMenu()
         {
-            throw new NotImplementedException();
+            _back = new Button(20, 20, 80, 40, "Back");
+
+            _buttons = new List<Button> { _back };
+        }
+
+        public Button Back
+        {
+            get { return _back; }
         }
     }
-    
 }

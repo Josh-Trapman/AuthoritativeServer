@@ -17,6 +17,7 @@ namespace Menus
             _join = new();
             _lobby = new();
 
+            Visible = true;
             _main.Visible = true;
 
             _menus = new List<IMenu>() { _main, _host, _join, _lobby };
@@ -26,23 +27,70 @@ namespace Menus
         {
             get { return _main; }
         }
+
+        public HostMenu Host
+        {
+            get { return _host; }
+        }
+
+        public JoinMenu Join
+        {
+            get { return _join; }
+        }
+
+        public LobbyMenu Lobby
+        {
+            get { return _lobby; }
+        }
+
+        public void Update()
+        {
+            if (_main.Visible)
+            {
+                if (_main.HostGame.Clicked())
+                {
+                    ShowMenu(_host);
+                }
+                if (_main.JoinGame.Clicked())
+                {
+                    ShowMenu(_join);
+                }
+            }
+
+            if (_host.Visible)
+            {
+                if (_host.EndHost.Clicked())
+                {
+                    ShowMenu(_main);
+                }
+            }
+
+            if (_join.Visible)
+            {
+                if (_join.Back.Clicked())
+                {
+                    ShowMenu(_main);
+                }
+            }
+        }
         
+        public void ShowMenu(IMenu menu)
+        {
+            SplashKit.ProcessEvents();
+            foreach (IMenu m in _menus)
+            {
+                m.Visible = false;
+            }
+
+            menu.Visible = true;
+        }
 
         public override void Draw()
         {
             foreach (IMenu menu in _menus)
             {
-                if (menu.Visible)
-                    menu.Draw();
+                menu.Draw();
             }
-        }
-
-        public void Update()
-        {
-            if (_main.Visible) _main.Update();
-            else if (_join.Visible) _join.Update();
-            else if (_host.Visible) _host.Update();
-            else if (_lobby.Visible)_lobby.Update();
         }
     }
 }

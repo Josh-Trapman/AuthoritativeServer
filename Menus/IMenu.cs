@@ -4,7 +4,6 @@ namespace Menus
     {
         public bool Visible { get; set; }
 
-        public void Update();
         public void Draw();
 
     }

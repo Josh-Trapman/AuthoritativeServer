@@ -17,7 +17,8 @@ namespace AuthoritativeServer
                 SplashKit.ProcessEvents();
 
                 game.Update();
-                
+                if (game.MenuHandler.Main.Exit.Clicked()) return;
+
                 SplashKit.ClearScreen();
 
                 game.Draw();
@@ -45,16 +46,5 @@ namespace AuthoritativeServer
 
             // }            
         }
-
-        private static BaseUDP? JoinOrHost()
-        {
-            Console.WriteLine("\n1: Host\n2: Join\n\nEnter (1-3): ");
-            string input = Console.ReadLine();
-
-            if (input == "1") return new Host();
-            else if (input == "2") return new Client();
-            else return null;
-        }
-
     }
 }

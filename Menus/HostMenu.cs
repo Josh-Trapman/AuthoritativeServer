@@ -8,14 +8,19 @@ namespace Menus
         public HostMenu()
         {
             _endHost = new Button(20, 20, 80, 40, "Back");
-            _startGame = new Button(20, 20, 80, 40, "Start");
+            _startGame = new Button(20, 70, 80, 40, "Start");
 
             _buttons = new List<Button> { _endHost, _startGame };
         }
 
-        public void Update()
+        public Button EndHost
         {
-            if (_endHost.Clicked()) ;
+            get { return _endHost; }
+        }
+
+        public Button StartGame
+        {
+            get { return _startGame; }
         }
     }
 }

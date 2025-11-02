@@ -13,11 +13,15 @@ namespace AuthoritativeServer
             _menuHandler = new MenuHandler();
         }
 
+        public MenuHandler MenuHandler
+        {
+            get { return _menuHandler; }
+        }
+
         public void Update()
         {
             UpdateMenus();
             UpdateSession();
-            
         }
 
         public void Draw()
@@ -32,11 +36,11 @@ namespace AuthoritativeServer
 
             _menuHandler.Update();
 
-            IUDP? createSession = _menuHandler.Main.NewSession();
-            if (createSession == null) return;
-
-            if (createSession is Client client) _session = client;
-            else if (createSession is Host host) _session = host;
+            if (_session != null && _menuHandler.Main.Visible)
+            {
+                _session.UDP.Close();
+                _session = null;
+            } 
         }
         
         private void UpdateSession()

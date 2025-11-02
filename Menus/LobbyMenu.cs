@@ -2,10 +2,9 @@ namespace Menus
 {
     public class LobbyMenu : BaseMenu, IMenu
     {
-        public void Update()
+        public LobbyMenu()
         {
-            throw new NotImplementedException();
+            
         }
     }
-    
 }
