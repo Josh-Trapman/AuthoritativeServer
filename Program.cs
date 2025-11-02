@@ -1,31 +1,49 @@
 using Network;
+using Menus;
 using SplashKitSDK;
 
 namespace AuthoritativeServer
 {
     public class Program
     {
+
         public static void Main()
         {
-            BaseUDP? udp = JoinOrHost();
+            Window window = new Window("Game", 700, 700);
+            Game game = new Game();
 
-            if (udp is Host)
+            while (!window.CloseRequested)
             {
-                udp = (Host)udp;
+                SplashKit.ProcessEvents();
+
+                game.Update();
+                
+                SplashKit.ClearScreen();
+
+                game.Draw();
+
+                SplashKit.RefreshScreen(60);
             }
-            else if (udp is Client)
-            {
-                udp = (Client)udp;
-            }
 
-            while (true)
-            {
-                if (udp == null) return;
+            // BaseUDP? udp = JoinOrHost();
 
-                udp.Update();
+            // if (udp is Host)
+            // {
+            //     udp = (Host)udp;
+            // }
+            // else if (udp is Client)
+            // {
+            //     udp = (Client)udp;
+            // }
+
+            // while (true)
+            // {
+            //     if (udp == null) return;
+
+            //     udp.Update();
 
 
-            }            
+            // }            
         }
 
         private static BaseUDP? JoinOrHost()
@@ -37,5 +55,6 @@ namespace AuthoritativeServer
             else if (input == "2") return new Client();
             else return null;
         }
+
     }
 }

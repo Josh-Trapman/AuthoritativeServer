@@ -1,10 +1,11 @@
 using System.Diagnostics;
 using System.Net;
+using System.Net.Sockets;
 using System.Text;
 
 namespace Network
 {
-    public class Host : BaseUDP
+    public class Host : BaseUDP, IUDP
     {
         private int _tick;
         private int _hostPort;
@@ -26,6 +27,16 @@ namespace Network
             }
         }
 
+        public UdpClient UDP
+        {
+            get { return _udp; }
+        }
+
+        public void Update()
+        {
+            BroadcastLobby();
+        }
+
         public void BroadcastLobby()
         {
             if (_broadcastTimer.ElapsedMilliseconds >= BROADCAST_DELAY)
@@ -42,11 +53,6 @@ namespace Network
                 _broadcastTimer.Restart();
                 _tick++;
             }
-        }
-
-        public override void Update()
-        {
-            BroadcastLobby();
         }
     }
 }

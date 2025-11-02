@@ -14,12 +14,5 @@ namespace Network
             _udp = new UdpClient();
             _broadcastEP = new IPEndPoint(IPAddress.Broadcast, BROADCAST_PORT);
         }
-        
-        public UdpClient UDP
-        {
-            get { return _udp; }
-        }
-
-        public abstract void Update();
     }
 }
