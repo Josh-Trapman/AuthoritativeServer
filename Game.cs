@@ -1,3 +1,5 @@
+
+using System.Drawing;
 using Menus;
 using Network;
 
@@ -10,6 +12,7 @@ namespace AuthoritativeServer
 
         public Game()
         {
+            _session = null;
             _menuHandler = new MenuHandler();
         }
 
@@ -26,30 +29,46 @@ namespace AuthoritativeServer
 
         public void Draw()
         {
-            if (_menuHandler.Visible) _menuHandler.Draw();
+            _menuHandler.Draw();
         }
 
         private void UpdateMenus()
         {
-            if (!_menuHandler.Visible) return;
-
             _menuHandler.Update();
-
-            if (_menuHandler.Main.HostGame.Clicked()) _session = new Host();
-            if (_menuHandler.Main.JoinGame.Clicked()) _session = new Client();
-
-            if (_session != null && _menuHandler.Main.Visible)
+            if (_menuHandler.Menu is MainMenu && _session != null)
             {
                 _session.UDP.Close();
                 _session = null;
-            } 
+            }
+            if (_menuHandler.Menu is HostMenu host && _session == null)
+            {
+                Console.WriteLine("Host created");
+                _session = new Host();
+            }
+            if (_menuHandler.Menu is JoinMenu join && _session == null)
+            {
+                Console.WriteLine("Client created");
+                _session = new Host();
+            }
         }
-        
+
         private void UpdateSession()
         {
             if (_session == null) return;
 
             _session.Update();
+        }
+        
+        public void UpdateJoinableLobbies()
+        {
+            if (_session is Client client)
+            foreach (int lobby in client.Lobbies)
+                {
+                if (_menuHandler.Menu is JoinMenu join)
+                    {
+                        join.AddLobby(lobby);
+                    }
+                }
         }
     }
 }

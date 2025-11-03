@@ -4,14 +4,8 @@ namespace Menus
 {
     public abstract class BaseMenu
     {
-        private bool _visible;
         protected List<Button> _buttons = [];
        
-        public bool Visible
-        {
-            get { return _visible; }
-            set { _visible = value; }
-        }
 
         public List<Button> Buttons
         {
@@ -20,13 +14,12 @@ namespace Menus
 
         public virtual void Draw()
         {
-            if (_visible)
+
+            foreach (Button button in _buttons)
             {
-                foreach (Button button in _buttons)
-                {
-                    button.Draw();
-                }
+                button.Draw();
             }
+            
         }
     }
 }

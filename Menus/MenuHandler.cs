@@ -1,96 +1,60 @@
+using System.Net.Mail;
+using Network;
 using SplashKitSDK;
 
 namespace Menus
 {
     public class MenuHandler : BaseMenu
     {
-        private MainMenu _main;
-        private HostMenu _host;
-        private JoinMenu _join;
-        private LobbyMenu _lobby;
-        private List<IMenu> _menus;
+        private IMenu _menu;
 
         public MenuHandler()
         {
-            _main = new();
-            _host = new();
-            _join = new();
-            _lobby = new();
 
-            Visible = true;
-            _main.Visible = true;
 
-            _menus = new List<IMenu>() { _main, _host, _join, _lobby };
+            _menu = new MainMenu();
+
         }
 
-        public MainMenu Main
+        public IMenu Menu
         {
-            get { return _main; }
-        }
-
-        public HostMenu Host
-        {
-            get { return _host; }
-        }
-
-        public JoinMenu Join
-        {
-            get { return _join; }
-        }
-
-        public LobbyMenu Lobby
-        {
-            get { return _lobby; }
+            get { return _menu; }
         }
 
         public void Update()
         {
-            if (_main.Visible)
+            if (_menu is MainMenu menu)
             {
-                if (_main.HostGame.Clicked())
+                if (menu.HostGame.Clicked())
                 {
-                    ShowMenu(_host);
+                    _menu = new HostMenu();
                 }
-                if (_main.JoinGame.Clicked())
+                if (menu.JoinGame.Clicked())
                 {
-                    ShowMenu(_join);
-                }
-            }
-
-            if (_host.Visible)
-            {
-                if (_host.EndHost.Clicked())
-                {
-                    ShowMenu(_main);
+                    _menu = new JoinMenu();
                 }
             }
 
-            if (_join.Visible)
+            if (_menu is HostMenu host)
             {
-                if (_join.Back.Clicked())
+                if (host.EndHost.Clicked())
                 {
-                    ShowMenu(_main);
+                    _menu = new MainMenu();
                 }
             }
-        }
-        
-        public void ShowMenu(IMenu menu)
-        {
-            SplashKit.ProcessEvents();
-            foreach (IMenu m in _menus)
-            {
-                m.Visible = false;
-            }
 
-            menu.Visible = true;
+            if (_menu is JoinMenu join)
+            {
+                if (join.Back.Clicked())
+                {
+                    _menu = new MainMenu();
+                }
+            }
         }
 
         public override void Draw()
         {
-            foreach (IMenu menu in _menus)
-            {
-                menu.Draw();
-            }
+            _menu.Draw();
         }
     }
 }

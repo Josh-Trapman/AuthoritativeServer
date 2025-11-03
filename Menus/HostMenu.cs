@@ -3,14 +3,14 @@ namespace Menus
     public class HostMenu : BaseMenu, IMenu
     {
         private Button _endHost;
-        private Button _startGame;
+        // private Button _startGame;
 
         public HostMenu()
         {
             _endHost = new Button(100, 20, 80, 40, "Back");
-            _startGame = new Button(20, 70, 80, 40, "Start");
+            // _startGame = new Button(20, 70, 80, 40, "Start");
 
-            _buttons = new List<Button> { _endHost, _startGame };
+            _buttons = new List<Button> { _endHost };
         }
 
         public Button EndHost
@@ -18,9 +18,9 @@ namespace Menus
             get { return _endHost; }
         }
 
-        public Button StartGame
-        {
-            get { return _startGame; }
-        }
+        // public Button StartGame
+        // {
+        //     get { return _startGame; }
+        // }
     }
 }
