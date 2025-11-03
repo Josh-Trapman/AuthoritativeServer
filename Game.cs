@@ -45,10 +45,20 @@ namespace AuthoritativeServer
                 Console.WriteLine("Host created");
                 _session = new Host();
             }
-            if (_menuHandler.Menu is JoinMenu join && _session == null)
+            if (_menuHandler.Menu is JoinMenu join)
             {
-                Console.WriteLine("Client created");
-                _session = new Host();
+                if (_session == null)
+                {
+                    Console.WriteLine("Client created");
+                    _session = new Client();
+
+                }
+                
+                if (_session is Client client)
+                {
+                    UpdateJoinableLobbies(join, client);
+                }
+
             }
         }
 
@@ -59,16 +69,12 @@ namespace AuthoritativeServer
             _session.Update();
         }
         
-        public void UpdateJoinableLobbies()
+        public void UpdateJoinableLobbies(JoinMenu menu, Client client)
         {
-            if (_session is Client client)
             foreach (int lobby in client.Lobbies)
-                {
-                if (_menuHandler.Menu is JoinMenu join)
-                    {
-                        join.AddLobby(lobby);
-                    }
-                }
+            {
+                menu.AddLobby(lobby);
+            }
         }
     }
 }
