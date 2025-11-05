@@ -1,15 +1,16 @@
 using SplashKitSDK;
+using Global;
 
 namespace Menus
 {
     public class JoinMenu : BaseMenu, IMenu
     {
         private Button _back;
-        private List<int> _lobbies;
+        private List<Lobby> _lobbies;
 
         public JoinMenu()
         {
-            _lobbies = new List<int>();
+            _lobbies = new List<Lobby>();
             _back = new Button(20, 20, 80, 40, "Back");
 
             _buttons = new List<Button> { _back };
@@ -20,17 +21,19 @@ namespace Menus
             get { return _back; }
         }
 
-        public List<int> Lobbies
+        public List<Lobby> Lobbies
         {
             get { return _lobbies; }
         }
 
-        public void AddLobby(int data)
+        public void AddLobby(Lobby lobby)
         {
-            if (!_lobbies.Contains(data))
-            {
-                _lobbies.Add(data);
-            }
+            _lobbies.Add(lobby);
+        }
+
+        public void RemoveLobby(Lobby lobby)
+        {
+            _lobbies.Remove(lobby);
         }
 
         public override void Draw()
@@ -39,7 +42,9 @@ namespace Menus
 
             for (int i = 0; i < _lobbies.Count; i++)
             {
-                SplashKit.DrawText(_lobbies[i].ToString(), Color.Black, 400, i * 50 + 20);
+                _lobbies[i].Button.X = 200;
+                _lobbies[i].Button.Y = i * 60;
+                _lobbies[i].DrawButton();
             }
         }
     }

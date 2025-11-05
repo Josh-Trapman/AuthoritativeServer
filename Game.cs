@@ -1,7 +1,11 @@
 
 using System.Drawing;
+using System.Net;
+using System.Text;
 using Menus;
+using Global;
 using Network;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AuthoritativeServer
 {
@@ -35,30 +39,42 @@ namespace AuthoritativeServer
         private void UpdateMenus()
         {
             _menuHandler.Update();
+
             if (_menuHandler.Menu is MainMenu && _session != null)
             {
                 _session.UDP.Close();
                 _session = null;
             }
-            if (_menuHandler.Menu is HostMenu host && _session == null)
+
+            else if (_menuHandler.Menu is HostMenu && _session == null)
             {
                 Console.WriteLine("Host created");
                 _session = new Host();
             }
-            if (_menuHandler.Menu is JoinMenu join)
+
+            else if (_menuHandler.Menu is JoinMenu join)
             {
+                Lobby? joinLobby = null;
                 if (_session == null)
                 {
                     Console.WriteLine("Client created");
                     _session = new Client();
-
                 }
-                
+
+                foreach (Lobby lobby in join.Lobbies)
+                {
+                    if (lobby.Button.Clicked()) joinLobby = lobby;
+                }
+
                 if (_session is Client client)
                 {
                     UpdateJoinableLobbies(join, client);
-                }
 
+                    if (joinLobby != null)
+                    {
+                        client.RequestJoin(joinLobby);
+                    }
+                }
             }
         }
 
@@ -68,12 +84,20 @@ namespace AuthoritativeServer
 
             _session.Update();
         }
-        
+
         public void UpdateJoinableLobbies(JoinMenu menu, Client client)
         {
-            foreach (int lobby in client.Lobbies)
+            menu.Lobbies.Clear();
+            foreach (Lobby lobby in client.Lobbies)
             {
-                menu.AddLobby(lobby);
+                if (!menu.Lobbies.Contains(lobby))
+                {
+                    menu.AddLobby(lobby);
+                }
+                else
+                {
+                    
+                }
             }
         }
     }

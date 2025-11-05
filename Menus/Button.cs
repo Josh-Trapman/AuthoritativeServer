@@ -4,16 +4,24 @@ namespace Menus
 {
     public class Button
     {
-        private bool _visible;
-        private int _width;
-        private int _height;
-        private string _text;
-        private Point2D _position;
-        private Rectangle _shape;
+        protected int _width;
+        protected int _height;
+        protected string _text;
+        protected Point2D _position;
+        protected Rectangle _shape;
+
+        public Button(float x, float y, int width, int height)
+        {
+            _text = "";
+            _width = width;
+            _height = height;
+            _position = new Point2D() { X = x, Y = y };  
+
+            _shape = new Rectangle() { X = x, Y = y, Width = width, Height = height};
+        }
 
         public Button(float x, float y, int width, int height, string text)
         {
-            _visible = true;
             _width = width;
             _height = height;
             _position = new Point2D() { X = x, Y = y };
@@ -25,27 +33,26 @@ namespace Menus
         public double X
         {
             get { return _position.X; }
+            set { _position.X = value; }
         }
         public double Y
         {
             get { return _position.Y; }
+            set { _position.Y = value; }
         }
 
-        public bool Visible
+        public virtual void Draw()
         {
-            get { return _visible; }
-            set { _visible = value; }
-        }
+            _shape.X = X;
+            _shape.Y = Y;
 
-        public void Draw()
-        {
             if (Hovering()) SplashKit.DrawRectangle(Color.Red, _shape);
             else SplashKit.FillRectangle(Color.Red, _shape);
 
             SplashKit.DrawText(_text, Color.Black, X + (_width - _text.Length * 10) / 2, Y + (_height / 2) - 5);
         }
 
-        public bool Hovering()
+        public virtual bool Hovering()
         {
             Point2D mouse = SplashKit.MousePosition();
 
@@ -55,7 +62,7 @@ namespace Menus
             return hovered;
         }
 
-        public bool Clicked()
+        public virtual bool Clicked()
         {
             return SplashKit.MouseClicked(MouseButton.LeftButton) && Hovering();
         }

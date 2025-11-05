@@ -10,10 +10,7 @@ namespace Menus
 
         public MenuHandler()
         {
-
-
             _menu = new MainMenu();
-
         }
 
         public IMenu Menu
@@ -23,33 +20,52 @@ namespace Menus
 
         public void Update()
         {
+            MainMenuEvents();
+            HostMenuEvents();
+            JoinMenuEvents();         
+        }
+
+        public void MainMenuEvents()
+        {
             if (_menu is MainMenu menu)
             {
                 if (menu.HostGame.Clicked())
                 {
-                    _menu = new HostMenu();
+                    OpenMenu(new HostMenu());
                 }
                 if (menu.JoinGame.Clicked())
                 {
-                    _menu = new JoinMenu();
+                    OpenMenu(new JoinMenu());
                 }
             }
+        }
 
+        public void HostMenuEvents()
+        {
             if (_menu is HostMenu host)
             {
                 if (host.EndHost.Clicked())
                 {
-                    _menu = new MainMenu();
+                    OpenMenu(new MainMenu());
                 }
             }
+        }
 
+        public void JoinMenuEvents()
+        {
             if (_menu is JoinMenu join)
             {
                 if (join.Back.Clicked())
                 {
-                    _menu = new MainMenu();
+                    OpenMenu(new MainMenu());
                 }
             }
+        }
+
+        private void OpenMenu(IMenu menuToOpen)
+        {
+            SplashKit.ProcessEvents();
+            _menu = menuToOpen;
         }
 
         public override void Draw()
